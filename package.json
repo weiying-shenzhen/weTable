@@ -8,7 +8,8 @@
     "build:es6": "rollup src/index.js -f cjs -o dist/weTable.es6.js",
     "watch": "rollup -c -w",
     "pro": "NODE_ENV=production rollup -c",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "update": "npm run build:es6 && npm run build && npm run pro",
+    "doc": "./node_modules/.bin/jsdoc2md -t template.md -f src/*.js > README.md"
   },
   "repository": "git@github.com:weiying-shenzhen/weTable.git",
   "keywords": [
@@ -19,6 +20,7 @@
   "author": "henryluki <iamamiracle55@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "jsdoc-to-markdown": "^3.0.0",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-latest": "^6.24.1",
     "rollup-plugin-babel": "^2.7.1",
