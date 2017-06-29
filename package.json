@@ -1,0 +1,29 @@
+{
+  "name": "we-table",
+  "version": "0.0.1",
+  "description": "A table builder which is able to graft row from row",
+  "main": "dist/weTable.js",
+  "scripts": {
+    "build": "rollup -c",
+    "build:es6": "rollup src/index.js -f cjs -o dist/weTable.es6.js",
+    "watch": "rollup -c -w",
+    "pro": "NODE_ENV=production rollup -c",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "git@github.com:weiying-shenzhen/weTable.git",
+  "keywords": [
+    "table",
+    "builder",
+    "html"
+  ],
+  "author": "henryluki <iamamiracle55@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-latest": "^6.24.1",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-uglify": "^1.0.1",
+    "rollup-watch": "^3.2.2"
+  }
+}
