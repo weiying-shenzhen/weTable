@@ -28,13 +28,25 @@ var createClass = function () {
   };
 }();
 
+/**
+ * Row: Table Row (tr)
+ */
 var Row = function () {
+  /**
+   * create a Row instance
+   */
   function Row() {
     classCallCheck(this, Row);
 
     this.cells = [];
     return this;
   }
+  /**
+   * append cell(s) in the back of cells stack (push)
+   *
+   * @param {Array|Object} cells   - cell instance
+   */
+
 
   createClass(Row, [{
     key: "addCell",
@@ -46,6 +58,12 @@ var Row = function () {
       }
       return this;
     }
+    /**
+     *  insert cell(s) in the front of cells stack (unshift)
+     *
+     * @param {Array|Object} cells   - cell instance
+     */
+
   }, {
     key: "unshiftCell",
     value: function unshiftCell(cells) {
@@ -56,6 +74,12 @@ var Row = function () {
       }
       return this;
     }
+    /**
+     * graft row cells in the back of cells stack
+     *
+     * @param  {Row} row  - row instance
+     */
+
   }, {
     key: "appendRow",
     value: function appendRow(row) {
@@ -65,6 +89,13 @@ var Row = function () {
       this.addCell(row.cells);
       return this;
     }
+    /**
+     *
+     * render `tr` element str
+     *
+     * @return {String}
+     */
+
   }, {
     key: "render",
     value: function render() {
@@ -78,7 +109,17 @@ var Row = function () {
   return Row;
 }();
 
+/**
+ * Cell: Table cell (td)
+ */
 var Cell = function () {
+  /**
+   * create a Cell instance
+   *
+   * @param  {String} content  - content to display
+   * @param  {Number} row      - rowspan value
+   * @param  {Number} col      - colspan value
+   */
   function Cell() {
     var content = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
     var row = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
@@ -90,6 +131,13 @@ var Cell = function () {
     this.col = col;
     return this;
   }
+  /**
+   * set rowspan and colspan
+   *
+   * @param {Number} row  - rowspan value
+   * @param {Number} col  - colspan value
+   */
+
 
   createClass(Cell, [{
     key: 'setSpan',
@@ -125,6 +173,12 @@ var Cell = function () {
 
       return '' + rowspan + colspan + (className ? 'class="' + className + '"' : '');
     }
+    /**
+     * render `td` element str
+     *
+     * @return {String}
+     */
+
   }, {
     key: 'render',
     value: function render() {
@@ -134,12 +188,25 @@ var Cell = function () {
   return Cell;
 }();
 
+/**
+ * Table: HTML Table (table)
+ */
 var Table = function () {
+  /**
+   * create a Table instance
+   */
   function Table() {
     classCallCheck(this, Table);
 
     this.rows = [];
+    return this;
   }
+  /**
+   * append row(s) in the back of rows stack (push)
+   *
+   * @param {Array|Object} rows   - row instance
+   */
+
 
   createClass(Table, [{
     key: 'addRow',
@@ -151,6 +218,12 @@ var Table = function () {
       }
       return this;
     }
+    /**
+     *  insert row(s) in the front of rows stack (unshift)
+     *
+     * @param {Array|Object} rows   - row instance
+     */
+
   }, {
     key: 'unshiftRow',
     value: function unshiftRow(rows) {
@@ -161,6 +234,13 @@ var Table = function () {
       }
       return this;
     }
+    /**
+     *
+     * render `table` element str
+     *
+     * @return {String}
+     */
+
   }, {
     key: 'render',
     value: function render() {
@@ -174,10 +254,15 @@ var Table = function () {
   return Table;
 }();
 
+/**
+ * weTable: A table builder which is able to graft row from row
+ *
+ * @module weTable
+ */
 var index = {
-    Row: Row,
-    Cell: Cell,
-    Table: Table
+  Row: Row,
+  Cell: Cell,
+  Table: Table
 };
 
 return index;
