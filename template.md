@@ -25,9 +25,11 @@ const priceNumber = new Row().addCell([new Cell("可售张数", 1, 3), new Cell(
 const priceRate = new Row().addCell([new Cell("已售比例", 1, 3), new Cell(0.5), new Cell(0.5)])
 
 const firstRow = new Row()
-                .addCell([new Cell("销售渠道", 5, 3)])
-                .appendRow(priceName)
-                .addCell(new Cell("总计", 5))
+            .addCell(new Cell("销售渠道", 5, 3))
+            .appendRow(priceName)
+            .addCell(new Cell("总计", 5))
+// or:
+// const firstRow = priceName.unshiftCell(new Cell("销售渠道", 5, 3)).addCell(new Cell("总计", 5))
 
 table.addRow([firstRow, price, priceAmount, priceNumber, priceRate])
 
