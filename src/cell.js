@@ -1,5 +1,5 @@
 /**
- * Cell: Table cell (td)
+ * Cell: Table Cell (td)
  */
 class Cell {
   /**

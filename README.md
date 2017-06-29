@@ -54,7 +54,7 @@ Output
 
 <dl>
 <dt><a href="#Cell">Cell</a></dt>
-<dd><p>Cell: Table cell (td)</p>
+<dd><p>Cell: Table Cell (td)</p>
 </dd>
 <dt><a href="#Row">Row</a></dt>
 <dd><p>Row: Table Row (tr)</p>
@@ -72,7 +72,7 @@ weTable: A table builder which is able to graft row from row
 <a name="Cell"></a>
 
 ## Cell
-Cell: Table cell (td)
+Cell: Table Cell (td)
 
 **Kind**: global class  
 
