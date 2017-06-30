@@ -5,9 +5,9 @@ class Row {
   /**
    * create a Row instance
    */
-  constructor() {
+  constructor(cells = []) {
     this.cells = []
-    return this
+    this.addCell(cells)
   }
   /**
    * append cell(s) in the back of cells stack (push)
