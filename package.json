@@ -1,6 +1,6 @@
 {
   "name": "we-table",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A table builder which is able to graft row from row",
   "main": "dist/weTable.js",
   "scripts": {
