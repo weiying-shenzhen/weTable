@@ -13,7 +13,6 @@ class Cell {
     this.content = content
     this.row = row
     this.col = col
-    return this
   }
   /**
    * set rowspan and colspan

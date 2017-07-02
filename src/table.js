@@ -7,7 +7,6 @@ class Table {
    */
   constructor() {
     this.rows = []
-    return this
   }
   /**
    * append row(s) in the back of rows stack (push)
