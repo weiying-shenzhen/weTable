@@ -4,6 +4,8 @@
 class Row {
   /**
    * create a Row instance
+   *
+   * @param {Array|Object} cells   - cell instance
    */
   constructor(cells = []) {
     this.cells = []
