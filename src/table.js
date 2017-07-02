@@ -4,9 +4,12 @@
 class Table {
   /**
    * create a Table instance
+   *
+   * @param {Array|Object} rows   - row instance
    */
-  constructor() {
+  constructor(rows = []) {
     this.rows = []
+    this.addRow(rows)
   }
   /**
    * append row(s) in the back of rows stack (push)
