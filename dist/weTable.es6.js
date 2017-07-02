@@ -6,10 +6,12 @@
 class Row {
   /**
    * create a Row instance
+   *
+   * @param {Array|Object} cells   - cell instance
    */
-  constructor() {
+  constructor(cells = []) {
     this.cells = [];
-    return this
+    this.addCell(cells);
   }
   /**
    * append cell(s) in the back of cells stack (push)
@@ -63,7 +65,7 @@ class Row {
 }
 
 /**
- * Cell: Table cell (td)
+ * Cell: Table Cell (td)
  */
 class Cell {
   /**
@@ -77,7 +79,6 @@ class Cell {
     this.content = content;
     this.row = row;
     this.col = col;
-    return this
   }
   /**
    * set rowspan and colspan
@@ -129,10 +130,12 @@ class Cell {
 class Table {
   /**
    * create a Table instance
+   *
+   * @param {Array|Object} rows   - row instance
    */
-  constructor() {
+  constructor(rows = []) {
     this.rows = [];
-    return this
+    this.addRow(rows);
   }
   /**
    * append row(s) in the back of rows stack (push)

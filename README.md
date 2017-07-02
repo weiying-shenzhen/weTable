@@ -121,7 +121,7 @@ Row: Table Row (tr)
 **Kind**: global class  
 
 * [Row](#Row)
-    * [new Row()](#new_Row_new)
+    * [new Row(cells)](#new_Row_new)
     * [.addCell(cells)](#Row+addCell)
     * [.unshiftCell(cells)](#Row+unshiftCell)
     * [.appendRow(row)](#Row+appendRow)
@@ -129,8 +129,13 @@ Row: Table Row (tr)
 
 <a name="new_Row_new"></a>
 
-### new Row()
+### new Row(cells)
 create a Row instance
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| cells | <code>Array</code> \| <code>Object</code> | cell instance |
 
 <a name="Row+addCell"></a>
 
@@ -179,15 +184,20 @@ Table: HTML Table (table)
 **Kind**: global class  
 
 * [Table](#Table)
-    * [new Table()](#new_Table_new)
+    * [new Table(rows)](#new_Table_new)
     * [.addRow(rows)](#Table+addRow)
     * [.unshiftRow(rows)](#Table+unshiftRow)
     * [.render()](#Table+render) ⇒ <code>String</code>
 
 <a name="new_Table_new"></a>
 
-### new Table()
+### new Table(rows)
 create a Table instance
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| rows | <code>Array</code> \| <code>Object</code> | row instance |
 
 <a name="Table+addRow"></a>
 

@@ -34,12 +34,15 @@ var createClass = function () {
 var Row = function () {
   /**
    * create a Row instance
+   *
+   * @param {Array|Object} cells   - cell instance
    */
   function Row() {
+    var cells = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
     classCallCheck(this, Row);
 
     this.cells = [];
-    return this;
+    this.addCell(cells);
   }
   /**
    * append cell(s) in the back of cells stack (push)
@@ -110,7 +113,7 @@ var Row = function () {
 }();
 
 /**
- * Cell: Table cell (td)
+ * Cell: Table Cell (td)
  */
 var Cell = function () {
   /**
@@ -129,7 +132,6 @@ var Cell = function () {
     this.content = content;
     this.row = row;
     this.col = col;
-    return this;
   }
   /**
    * set rowspan and colspan
@@ -194,12 +196,15 @@ var Cell = function () {
 var Table = function () {
   /**
    * create a Table instance
+   *
+   * @param {Array|Object} rows   - row instance
    */
   function Table() {
+    var rows = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
     classCallCheck(this, Table);
 
     this.rows = [];
-    return this;
+    this.addRow(rows);
   }
   /**
    * append row(s) in the back of rows stack (push)
