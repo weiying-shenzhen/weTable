@@ -1,3 +1,4 @@
+import { renderClass } from './utils'
 /**
  * Table: HTML Table (table)
  */
@@ -38,6 +39,15 @@ class Table {
     return this
   }
   /**
+   * set class name
+   *
+   * @param {String} className - class name
+   */
+  setClass(className = '') {
+    this.className = className
+    return this
+  }
+  /**
    *
    * render `table` element str
    *
@@ -46,7 +56,7 @@ class Table {
   render() {
     const rows = this.rows.map(row => row.render())
 
-    return `<table>${rows.join('')}</table>`
+    return `<table ${renderClass(this.className)}>${rows.join('')}</table>`
   }
 }
 

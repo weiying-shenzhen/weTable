@@ -1,3 +1,4 @@
+import { renderAttribute, renderClass } from './utils'
 /**
  * Cell: Table Cell (td)
  */
@@ -25,28 +26,47 @@ class Cell {
     this.col = col
     return this
   }
-  renderAttribute() {
+  /**
+   * set class name
+   *
+   * @param {String} className - class name
+   */
+  setClass(className = '') {
+    this.className = className
+    return this
+  }
+  _renderClass() {
     const {
       row,
-      col
+      col,
+      className
     } = this
-    if (row === 1 && col === 1) return ""
 
     let classNames = []
-    let rowspan = ''
-    let colspan = ''
 
     if (row > 1) {
       classNames.push(`row-${row}`)
-      rowspan = `rowspan="${row}" `
     }
     if (col > 1) {
       classNames.push(`col-${col}`)
-      colspan = `colspan="${col}" `
     }
-    const className = classNames.join(' ')
+    className && classNames.push(className)
 
-    return `${rowspan}${colspan}${className ? `class="${className}"` : ''}`
+    const renderClass = classNames.join(' ')
+
+    return renderClass ? renderClass : ''
+  }
+  _renderAttribute() {
+    const {
+      row,
+      col,
+    } = this
+
+    return renderAttribute({
+      rowspan: row > 1 ? row : '',
+      colspan: col > 1 ? col : '',
+      class: this._renderClass()
+    })
   }
   /**
    * render `td` element str
@@ -54,7 +74,7 @@ class Cell {
    * @return {String}
    */
   render() {
-    return `<td ${this.renderAttribute()}>${this.content}</td>`
+    return `<td ${this._renderAttribute()}>${this.content}</td>`
   }
 }
 

@@ -81,6 +81,7 @@ Cell: Table Cell (td)
 * [Cell](#Cell)
     * [new Cell(content, row, col)](#new_Cell_new)
     * [.setSpan(row, col)](#Cell+setSpan)
+    * [.setClass(className)](#Cell+setClass)
     * [.render()](#Cell+render) ⇒ <code>String</code>
 
 <a name="new_Cell_new"></a>
@@ -107,6 +108,17 @@ set rowspan and colspan
 | row | <code>Number</code> | <code>1</code> | rowspan value |
 | col | <code>Number</code> | <code>1</code> | colspan value |
 
+<a name="Cell+setClass"></a>
+
+### cell.setClass(className)
+set class name
+
+**Kind**: instance method of [<code>Cell</code>](#Cell)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| className | <code>String</code> | class name |
+
 <a name="Cell+render"></a>
 
 ### cell.render() ⇒ <code>String</code>
@@ -125,6 +137,7 @@ Row: Table Row (tr)
     * [.addCell(cells)](#Row+addCell)
     * [.unshiftCell(cells)](#Row+unshiftCell)
     * [.appendRow(row)](#Row+appendRow)
+    * [.setClass(className)](#Row+setClass)
     * [.render()](#Row+render) ⇒ <code>String</code>
 
 <a name="new_Row_new"></a>
@@ -170,6 +183,17 @@ graft row cells in the back of cells stack
 | --- | --- | --- |
 | row | [<code>Row</code>](#Row) | row instance |
 
+<a name="Row+setClass"></a>
+
+### row.setClass(className)
+set class name
+
+**Kind**: instance method of [<code>Row</code>](#Row)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| className | <code>String</code> | class name |
+
 <a name="Row+render"></a>
 
 ### row.render() ⇒ <code>String</code>
@@ -187,6 +211,7 @@ Table: HTML Table (table)
     * [new Table(rows)](#new_Table_new)
     * [.addRow(rows)](#Table+addRow)
     * [.unshiftRow(rows)](#Table+unshiftRow)
+    * [.setClass(className)](#Table+setClass)
     * [.render()](#Table+render) ⇒ <code>String</code>
 
 <a name="new_Table_new"></a>
@@ -220,6 +245,17 @@ insert row(s) in the front of rows stack (unshift)
 | Param | Type | Description |
 | --- | --- | --- |
 | rows | <code>Array</code> \| <code>Object</code> | row instance |
+
+<a name="Table+setClass"></a>
+
+### table.setClass(className)
+set class name
+
+**Kind**: instance method of [<code>Table</code>](#Table)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| className | <code>String</code> | class name |
 
 <a name="Table+render"></a>
 

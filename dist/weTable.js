@@ -4,6 +4,17 @@
 	(global.WeTable = factory());
 }(this, (function () { 'use strict';
 
+var renderAttribute = function renderAttribute(obj) {
+    return Object.keys(obj).reduce(function (acc, key) {
+        var value = obj[key];
+        return value ? acc.concat(key + "=\"" + value + "\"") : acc;
+    }, []).join(' ');
+};
+
+var renderClass = function renderClass(className) {
+    return className ? "class=\"" + className + "\"" : "";
+};
+
 var classCallCheck = function (instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -31,6 +42,7 @@ var createClass = function () {
 /**
  * Row: Table Row (tr)
  */
+
 var Row = function () {
   /**
    * create a Row instance
@@ -52,7 +64,7 @@ var Row = function () {
 
 
   createClass(Row, [{
-    key: "addCell",
+    key: 'addCell',
     value: function addCell(cells) {
       if (Array.isArray(cells)) {
         this.cells = this.cells.concat(cells);
@@ -68,7 +80,7 @@ var Row = function () {
      */
 
   }, {
-    key: "unshiftCell",
+    key: 'unshiftCell',
     value: function unshiftCell(cells) {
       if (Array.isArray(cells)) {
         this.cells = cells.concat(this.cells);
@@ -84,12 +96,26 @@ var Row = function () {
      */
 
   }, {
-    key: "appendRow",
+    key: 'appendRow',
     value: function appendRow(row) {
       if (!(row instanceof Row)) {
         console.error("row must instanceof Row");
       }
       this.addCell(row.cells);
+      return this;
+    }
+    /**
+     * set class name
+     *
+     * @param {String} className - class name
+     */
+
+  }, {
+    key: 'setClass',
+    value: function setClass() {
+      var className = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+
+      this.className = className;
       return this;
     }
     /**
@@ -100,13 +126,13 @@ var Row = function () {
      */
 
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       var cells = this.cells.map(function (cell) {
         return cell.render();
       });
 
-      return "<tr>" + cells.join('') + "</tr>";
+      return '<tr ' + renderClass(this.className) + '>' + cells.join('') + '</tr>';
     }
   }]);
   return Row;
@@ -115,6 +141,7 @@ var Row = function () {
 /**
  * Cell: Table Cell (td)
  */
+
 var Cell = function () {
   /**
    * create a Cell instance
@@ -151,29 +178,54 @@ var Cell = function () {
       this.col = col;
       return this;
     }
-  }, {
-    key: 'renderAttribute',
-    value: function renderAttribute() {
-      var row = this.row,
-          col = this.col;
+    /**
+     * set class name
+     *
+     * @param {String} className - class name
+     */
 
-      if (row === 1 && col === 1) return "";
+  }, {
+    key: 'setClass',
+    value: function setClass() {
+      var className = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+
+      this.className = className;
+      return this;
+    }
+  }, {
+    key: '_renderClass',
+    value: function _renderClass() {
+      var row = this.row,
+          col = this.col,
+          className = this.className;
+
 
       var classNames = [];
-      var rowspan = '';
-      var colspan = '';
 
       if (row > 1) {
         classNames.push('row-' + row);
-        rowspan = 'rowspan="' + row + '" ';
       }
       if (col > 1) {
         classNames.push('col-' + col);
-        colspan = 'colspan="' + col + '" ';
       }
-      var className = classNames.join(' ');
+      className && classNames.push(className);
 
-      return '' + rowspan + colspan + (className ? 'class="' + className + '"' : '');
+      var renderClass$$1 = classNames.join(' ');
+
+      return renderClass$$1 ? renderClass$$1 : '';
+    }
+  }, {
+    key: '_renderAttribute',
+    value: function _renderAttribute() {
+      var row = this.row,
+          col = this.col;
+
+
+      return renderAttribute({
+        rowspan: row > 1 ? row : '',
+        colspan: col > 1 ? col : '',
+        class: this._renderClass()
+      });
     }
     /**
      * render `td` element str
@@ -184,7 +236,7 @@ var Cell = function () {
   }, {
     key: 'render',
     value: function render() {
-      return '<td ' + this.renderAttribute() + '>' + this.content + '</td>';
+      return '<td ' + this._renderAttribute() + '>' + this.content + '</td>';
     }
   }]);
   return Cell;
@@ -193,6 +245,7 @@ var Cell = function () {
 /**
  * Table: HTML Table (table)
  */
+
 var Table = function () {
   /**
    * create a Table instance
@@ -240,6 +293,20 @@ var Table = function () {
       return this;
     }
     /**
+     * set class name
+     *
+     * @param {String} className - class name
+     */
+
+  }, {
+    key: 'setClass',
+    value: function setClass() {
+      var className = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+
+      this.className = className;
+      return this;
+    }
+    /**
      *
      * render `table` element str
      *
@@ -253,7 +320,7 @@ var Table = function () {
         return row.render();
       });
 
-      return '<table>' + rows.join('') + '</table>';
+      return '<table ' + renderClass(this.className) + '>' + rows.join('') + '</table>';
     }
   }]);
   return Table;

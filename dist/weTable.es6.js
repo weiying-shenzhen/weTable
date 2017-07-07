@@ -1,5 +1,16 @@
 'use strict';
 
+const renderAttribute = (obj) => {
+    return Object.keys(obj).reduce((acc, key) => {
+        const value = obj[key];
+        return value ? acc.concat(`${key}="${value}"`) : acc
+    }, []).join(' ')
+};
+
+const renderClass = (className) => {
+    return className ? `class="${className}"` : ""
+};
+
 /**
  * Row: Table Row (tr)
  */
@@ -52,6 +63,15 @@ class Row {
     return this
   }
   /**
+   * set class name
+   *
+   * @param {String} className - class name
+   */
+  setClass(className = '') {
+    this.className = className;
+    return this
+  }
+  /**
    *
    * render `tr` element str
    *
@@ -60,7 +80,7 @@ class Row {
   render() {
     const cells = this.cells.map(cell => cell.render());
 
-    return `<tr>${cells.join('')}</tr>`
+    return `<tr ${renderClass(this.className)}>${cells.join('')}</tr>`
   }
 }
 
@@ -91,28 +111,47 @@ class Cell {
     this.col = col;
     return this
   }
-  renderAttribute() {
+  /**
+   * set class name
+   *
+   * @param {String} className - class name
+   */
+  setClass(className = '') {
+    this.className = className;
+    return this
+  }
+  _renderClass() {
     const {
       row,
-      col
+      col,
+      className
     } = this;
-    if (row === 1 && col === 1) return ""
 
     let classNames = [];
-    let rowspan = '';
-    let colspan = '';
 
     if (row > 1) {
       classNames.push(`row-${row}`);
-      rowspan = `rowspan="${row}" `;
     }
     if (col > 1) {
       classNames.push(`col-${col}`);
-      colspan = `colspan="${col}" `;
     }
-    const className = classNames.join(' ');
+    className && classNames.push(className);
 
-    return `${rowspan}${colspan}${className ? `class="${className}"` : ''}`
+    const renderClass$$1 = classNames.join(' ');
+
+    return renderClass$$1 ? renderClass$$1 : ''
+  }
+  _renderAttribute() {
+    const {
+      row,
+      col,
+    } = this;
+
+    return renderAttribute({
+      rowspan: row > 1 ? row : '',
+      colspan: col > 1 ? col : '',
+      class: this._renderClass()
+    })
   }
   /**
    * render `td` element str
@@ -120,7 +159,7 @@ class Cell {
    * @return {String}
    */
   render() {
-    return `<td ${this.renderAttribute()}>${this.content}</td>`
+    return `<td ${this._renderAttribute()}>${this.content}</td>`
   }
 }
 
@@ -164,6 +203,15 @@ class Table {
     return this
   }
   /**
+   * set class name
+   *
+   * @param {String} className - class name
+   */
+  setClass(className = '') {
+    this.className = className;
+    return this
+  }
+  /**
    *
    * render `table` element str
    *
@@ -172,7 +220,7 @@ class Table {
   render() {
     const rows = this.rows.map(row => row.render());
 
-    return `<table>${rows.join('')}</table>`
+    return `<table ${renderClass(this.className)}>${rows.join('')}</table>`
   }
 }
 

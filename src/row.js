@@ -1,3 +1,4 @@
+import { renderClass } from './utils'
 /**
  * Row: Table Row (tr)
  */
@@ -50,6 +51,15 @@ class Row {
     return this
   }
   /**
+   * set class name
+   *
+   * @param {String} className - class name
+   */
+  setClass(className = '') {
+    this.className = className
+    return this
+  }
+  /**
    *
    * render `tr` element str
    *
@@ -58,7 +68,7 @@ class Row {
   render() {
     const cells = this.cells.map(cell => cell.render())
 
-    return `<tr>${cells.join('')}</tr>`
+    return `<tr ${renderClass(this.className)}>${cells.join('')}</tr>`
   }
 }
 
